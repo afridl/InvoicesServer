@@ -71,6 +71,7 @@ public class PersonsController : ControllerBase
     {
 
         PersonDto? updatedPerson = personManager.UpdatePerson(personDto, personId);
+        if (updatedPerson is null) { return NotFound(); }
         return Ok(updatedPerson);
     }
     [HttpGet("persons/statistics")]

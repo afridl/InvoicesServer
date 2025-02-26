@@ -1,5 +1,5 @@
 ﻿using Invoices.Api.Interfaces;
-using Invoices.Api.Managers;
+
 using Invoices.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,18 +19,14 @@ public class InvoicesController : ControllerBase
     {
         this.invoiceManager = invoiceManager;
     }
-    //[HttpGet("invoices")]
-    //public IActionResult GetInvoices()
-    //{
-    //    return Ok(invoiceManager.GetAllInvoices());
-    //}
+    
     [HttpGet("invoices/{invoiceId}")]
-    public IActionResult Getvoice(ulong invoiceId)
+    public IActionResult GetInvoice(ulong invoiceId)
     {
         InvoiceDto invoiceDto = invoiceManager.GetInvoice(invoiceId);
         if (invoiceDto == null)
         {
-            return BadRequest();
+            return NotFound();
         }
 
         return Ok(invoiceDto);
@@ -53,7 +49,8 @@ public class InvoicesController : ControllerBase
     public IActionResult UpdateInvoice([FromBody] InvoiceDto invoiceDto, ulong invoiceId)
     {
         if (invoiceDto == null) {return BadRequest();}
-        InvoiceDto? updatedInvoiceDto =invoiceManager.UpdateInvoice(invoiceDto, invoiceId);        
+        InvoiceDto? updatedInvoiceDto =invoiceManager.UpdateInvoice(invoiceDto, invoiceId);  
+        if (updatedInvoiceDto == null) { return NotFound(); }
         return Ok(updatedInvoiceDto);
     }
     [HttpGet("identification/{identificationNumber}/sales")]

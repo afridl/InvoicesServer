@@ -1,11 +1,6 @@
 ﻿using Invoices.Data.Interfaces;
 using Invoices.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Invoices.Data.Repositories
 {
@@ -15,11 +10,7 @@ namespace Invoices.Data.Repositories
         {
         }
 
-        public IList<Invoice> FindByBuyerId(ulong buyerId, int limit=int.MaxValue)
-        {
-            return dbSet.Where(i => i.BuyerId == buyerId).Take(limit).ToList();
-            
-        }
+        
 
         public IList<Invoice> FindByBuyerIN(string identificationNumber, int limit=int.MaxValue)
         {
@@ -27,27 +18,6 @@ namespace Invoices.Data.Repositories
         }
 
         
-
-        public IList<Invoice> FindByMaxPrice(int maxPrice, int limit=int.MaxValue)
-        {
-            return dbSet.Where(i => i.Price<=maxPrice).Take(limit).ToList();
-        }
-
-        public IList<Invoice> FindByMinPrice(int minPrice, int limit = int.MaxValue)
-        {
-            return dbSet.Where(i => i.Price>=minPrice).Take(limit).ToList();
-        }
-
-        public IList<Invoice> FindByProductName(string productName, int limit=int.MaxValue)
-        {
-            return dbSet.Where(i => i.Product == productName).Take(limit).ToList();
-        }
-
-        public IList<Invoice> FindBySellerId(ulong sellerId, int limit=int.MaxValue)
-        {
-            return dbSet.Where(i => i.SellerId == sellerId).Take(limit).ToList();
-        }
-
         public IList<Invoice> FindBySellerIN(string identificationNumber, int limit=int.MaxValue)
         {
             

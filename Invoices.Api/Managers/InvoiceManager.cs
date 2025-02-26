@@ -3,7 +3,7 @@ using Invoices.Api.Interfaces;
 using Invoices.Api.Models;
 using Invoices.Data.Interfaces;
 using Invoices.Data.Models;
-using Invoices.Data.Repositories;
+
 
 namespace Invoices.Api.Managers
 {
@@ -82,7 +82,10 @@ namespace Invoices.Api.Managers
             invoice.InvoiceID = invoiceId;
             invoice.Buyer = null;
             invoice.Seller = null;
-
+            if(!invoiceRepository.ExistsWithId(invoiceId))
+            {
+                return null!;
+            }
             Invoice updatedInvoice = invoiceRepository.Update(invoice);
             if (updatedInvoice.SellerId is not null)
             {

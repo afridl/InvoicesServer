@@ -53,10 +53,11 @@ public class PersonManager : IPersonManager
         return mapper.Map<PersonDto>(person);
     
     }
-    public PersonDto? UpdatePerson(PersonDto personDto,ulong invoiceId) {
+    public PersonDto? UpdatePerson(PersonDto personDto,ulong personId) {
         Person person = mapper.Map<Person>(personDto);
-        person.PersonId = invoiceId;
-        
+        person.PersonId = personId;
+        if (!personRepository.ExistsWithId(personId))
+            return null;
 
         Person? updatedPerson = personRepository.Update(person);
         return mapper.Map<PersonDto>(person);

@@ -1,5 +1,4 @@
-﻿using Invoices.Data.Models;
-using System.ComponentModel.DataAnnotations;
+﻿
 using System.Text.Json.Serialization;
 
 namespace Invoices.Api.Models
@@ -27,7 +26,7 @@ namespace Invoices.Api.Models
         
         public virtual PersonDto? Buyer { get; set; }
 
-        public bool Hidden { get; set; }
+        
         public ulong SellerId {  get; set; }
         public virtual PersonDto? Seller { get; set; }
         
